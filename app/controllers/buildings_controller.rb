@@ -25,7 +25,6 @@ class BuildingsController < ApplicationController
   # POST /buildings.json
   def create
     @building = Building.new(building_params)
-
     respond_to do |format|
       if @building.save
         format.html { redirect_to @building, notice: 'Building was successfully created.' }
@@ -54,7 +53,7 @@ class BuildingsController < ApplicationController
   # DELETE /buildings/1
   # DELETE /buildings/1.json
   def destroy
-    @building.destroy
+    Building.destroy_building(@building)
     respond_to do |format|
       format.html { redirect_to buildings_url, notice: 'Building was successfully destroyed.' }
       format.json { head :no_content }
@@ -71,4 +70,9 @@ class BuildingsController < ApplicationController
     def building_params
       params.require(:building).permit(:name)
     end
+
+  # def create_twin(building)
+  #   Building.create!(name: building.name)
+  # end
+
 end
