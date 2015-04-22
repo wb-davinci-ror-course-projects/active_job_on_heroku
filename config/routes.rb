@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root "buildings#show"
 
+  get 'demolished_building', to: 'buildings#demolished_building'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

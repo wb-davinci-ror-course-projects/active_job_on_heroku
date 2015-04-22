@@ -12,6 +12,9 @@ class BuildingsController < ApplicationController
   def show
   end
 
+  def demolished_building
+  end
+
   # GET /buildings/new
   def new
     @building = Building.new
@@ -41,7 +44,7 @@ class BuildingsController < ApplicationController
   def update
     respond_to do |format|
       if @building.update(building_params)
-        format.html { redirect_to @building, notice: 'Building was successfully updated.' }
+        format.html { redirect_to @buidling, notice: 'Building was successfully updated.' }
         format.json { render :show, status: :ok, location: @building }
       else
         format.html { render :edit }
@@ -58,7 +61,7 @@ class BuildingsController < ApplicationController
     #Building.destroy_building(@building)
     DestroyBuildingJob.set(wait: 10.seconds).perform_later(@building)
     respond_to do |format|
-      format.html { redirect_to buildings_url, notice: 'Building was successfully destroyed.' }
+      format.html { redirect_to demolished_building_path, notice: 'Oh No! You activated demolition, the building has been destroyed.' }
       format.json { head :no_content }
     end
   end
